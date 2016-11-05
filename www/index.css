@@ -1,0 +1,261 @@
+html {
+  font-family: "Oswald", Helvetica, sans-serif;
+  font-color: #333;
+  text-rendering: optimizelegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#body-wrapper {
+}
+
+#background-layer {
+  background-image: url('mac-background.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-color: #fff;
+}
+
+#header-wrapper, #hi-wrapper, #animation-wrapper {
+  width: 800px;
+  margin: 200px auto 0 auto;
+  text-align: center;
+}
+
+#animation-wrapper {
+  margin-top: 2000px !important;
+  margin-bottom: 100px;
+  height: 400px;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  padding: 40px;
+}
+
+#animation {
+  display: inline-block;
+  height: 100%;
+
+  /* this stuff is too intense for most browsers
+  filter: blur(2px) sepia(80%);
+  -webkit-filter: blur(2px) sepia(80%);
+  -moz-filter: blur(2px) sepia(80%);
+  -o-filter: blur(2px) sepia(80%);
+  -ms-filter: blur(2px) sepia(80%);
+  */
+}
+
+#hi-wrapper {
+  margin-top: 3500px !important;
+  margin-bottom: 100px;
+  padding: 0 20px 20px 20px;
+  height: 170px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.1);
+}
+
+#content-wrapper {
+  width: 640px;
+  height: 1000px;
+  margin: 400px auto 0 auto;
+  padding: 0 40px 40px 40px;
+}
+
+#links-before {
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+
+  background-color: #f83;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
+
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top: solid #444 6px;
+  border-left: solid #444 20px;
+  border-right: solid #444 20px;
+}
+
+#links {
+  margin-top: -16px;
+  width: 100%;
+  height: 900px;
+
+  background-color: #f83;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
+
+  background: linear-gradient(#f83, #fff) !important;
+
+  border-width: 0 20px;
+  border-color: #444;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, #444, rgba(68,68,68,0)) 1 100% !important;
+}
+
+#header {
+  margin: 0 0 0 0;
+  padding: 0;
+  font-size: 32px;
+  font-weight: normal;
+  letter-spacing: 18px;
+  text-transform: uppercase;
+  text-shadow: 0 0 48px #fffd00;
+}
+
+#yep {
+  text-align: right;
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+#hi {
+  text-align: center;
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+img, input {
+  vertical-align: middle;
+}
+
+img.letter {
+  width: 82px;
+  height: 82px;
+  -webkit-filter: drop-shadow(0 0 48px rgba(255,215,0,0.9));
+}
+
+#inspiration {
+  position: absolute;
+  font-size: 60px;
+  z-index: 1;
+  width: 97%;
+  letter-spacing: 4px;
+  top: 1000px;
+  color: brown;
+  opacity: 0.7;
+}
+
+ul {
+}
+
+li {
+  line-height: 64px;
+  font-size: 20px;
+  list-style-type: none;
+}
+
+.block {
+  display: inline-block;
+  border-bottom: #222 solid 1px;
+  white-space: nowrap;
+}
+.git {
+  display: inline-block;
+  background-image: url('git.png');
+  background-size: 20px 20px;
+  width: 20px; 
+  height: 20px;
+  content: "";
+  margin-left: 4px;
+}
+
+h3 {
+  margin: 20px 0 0 0;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+/*
+.block {
+  display: inline-block;
+  border: solid red 1px;
+  width: 100%;
+  padding-left: 20px;
+  margin-top: 10px;
+  background-color: #f83;
+}
+*/
+
+a:link {
+  text-decoration: none;
+  color: #213483;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #213483;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #4763d1;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+
+html {
+  font-size: 24px;
+}
+
+.next-link, .back-link {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 42px;
+}
+
+.date {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+
+.time {
+  display: block;
+  width: 300px;
+  text-align: center;
+}
+.channels {
+  display: block;
+  width: 300px;
+  text-align: center;
+}
+
+.no-games {
+  display: block;
+  width: 300px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.vs-or-at {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  vertical-align: text-top;
+  font-size: 42px;
+}
