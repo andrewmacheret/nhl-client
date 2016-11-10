@@ -206,44 +206,44 @@ a:active {
 
 
 html {
-  font-size: 24px;
+  font-size: 5vw;
 }
 
 .next-link, .back-link {
   display: inline-block;
-  width: 50px;
+  width: 17vw;
   text-align: center;
-  font-size: 42px;
+  font-size: 10vw;
 }
 
 .date {
   display: inline-block;
-  width: 200px;
+  width: 66vw;
   text-align: center;
 }
 
 .time {
   display: block;
-  width: 300px;
+  width: 100vw;
   text-align: center;
 }
 .channels {
   display: block;
-  width: 300px;
+  width: 100vw;
   text-align: center;
 }
 
 .no-games {
   display: block;
-  width: 300px;
-  margin-top: 50px;
+  width: 100vw;
+  margin-top: 16vw;
   text-align: center;
 }
 
 .logo {
   display: inline-block;
-  height: 100px;
-  width: 100px;
+  width: 33vw;
+  height: 33vw;
   padding: 0;
   margin: 0;
   vertical-align: middle;
@@ -253,9 +253,8 @@ html {
 
 .vs-or-at {
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 33vw;
   text-align: center;
   vertical-align: text-top;
-  font-size: 42px;
+  font-size: 10vw;
 }
