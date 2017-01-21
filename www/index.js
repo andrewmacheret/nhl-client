@@ -21,21 +21,21 @@ $(function() {
   };
 
   var loadSchedule = function(team, date) {
-    var url = 'https://nhl.andrewmacheret.com/schedule/' + team + '/' + date;
+    var url = 'https://nhl.andrewmacheret.com/schedule/' + encodeURIComponent(team) + '/' + encodeURIComponent(date);
     $.getJSON(url, function(json) {
 
       var dateObj = new Date(Date.parse(date));
       var dayOfWeek = daysOfWeek[dateObj.getUTCDay()];
 
-      var dateHtml = '<div class="date">' + date + ' (' + dayOfWeek + ')</div>';
+      var dateHtml = '<div class="date">' + escapeHtml(date) + ' (' + dayOfWeek + ')</div>';
 
       dateObj.setDate(dateObj.getDate() - 1);
       dateObj.setHours(dateObj.getHours() + 2); // hack to work with DST
       var dateMinus1 = dateObj.toISOString().substring(0, 10);
-      var backLink = '<a class="back-link" href="?team=' + team + '&date=' + dateMinus1 + '">&lt;</a>';
+      var backLink = '<a class="back-link" href="?team=' + escapeHtml(encodeURIComponent(team)) + '&amp;date=' + dateMinus1 + '">&lt;</a>';
       dateObj.setDate(dateObj.getDate() + 2);
       var datePlus1 = dateObj.toISOString().substring(0, 10);
-      var nextLink = '<a class="next-link" href="?team=' + team + '&date=' + datePlus1 + '">&gt;</a>';
+      var nextLink = '<a class="next-link" href="?team=' + escapeHtml(encodeURIComponent(team)) + '&amp;date=' + datePlus1 + '">&gt;</a>';
 
       var html = '<div class="date-section">' + backLink + dateHtml + nextLink + '</div>';
 
@@ -49,15 +49,15 @@ $(function() {
 
           var team1 = (item.isHome ? item.home : item.away);
           var team2 = (item.isHome ? item.away : item.home);
-
-          var logo1 = '<div class="logo logo-bg-dark--team-' + team1.id + '"></div>';
+          
+          var logo1 = '<div class="logo logo-bg-dark--team-' + escapeHtml(team1.id) + '" title="' + escapeHtml(team1.name) + '"></div>';
           var vsOrAt = '<div class="vs-or-at">' + (item.isHome ? 'vs' : 'at') + '</div>';
-          var logo2 = '<div class="logo logo-bg-dark--team-' + team2.id + '"></div>';
+          var logo2 = '<div class="logo logo-bg-dark--team-' + escapeHtml(team2.id) + '" title="' + escapeHtml(team2.name) + '"></div>';
 
 
           var time = '<div class="time">' + new Date(Date.parse(item.gameDate)).toLocaleTimeString() + '</div>';
           
-          var channels = '<div class="channels">' + item.broadcasts.join(', ') + '</div>';
+          var channels = '<div class="channels">' + escapeHtml(item.broadcasts.join(', ')) + '</div>';
 
           html += '<div class="item">' + logo1 + vsOrAt + logo2 + time + channels + '</div>';
 
@@ -69,7 +69,16 @@ $(function() {
 
     });
   };
-
+  
+  function escapeHtml(unsafe) {
+    return (unsafe + '')
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+  
   var loadCss = function() {
     var url = 'https://nhl.andrewmacheret.com/css';
     $.getJSON(url, function(json) {
@@ -89,7 +98,7 @@ $(function() {
   if (!query.date) {
     query.date = newLocalDate();
   }
-  window.history.replaceState({}, null, '?team=' + query.team + '&date=' + query.date);
+  window.history.replaceState({}, null, '?team=' + encodeURIComponent(query.team) + '&date=' + encodeURIComponent(query.date));
 
   loadSchedule(query.team, query.date);
 
