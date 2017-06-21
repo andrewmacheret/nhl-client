@@ -1,7 +1,7 @@
 'use strict';
 
 $(function() {
-  var apiUrl = 'http://nhl.andrewmacheret.com:9080';
+  var apiUrl = 'https://nhl.andrewmacheret.com:9443';
   
   var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
