@@ -1,7 +1,7 @@
 'use strict';
 
 $(function() {
-  var apiUrl = 'https://nhl.andrewmacheret.com:9443';
+  var apiUrl = 'https://nhl.andrewmacheret.com';
   
   var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -22,7 +22,7 @@ $(function() {
   };
 
   var loadSchedule = function(team, date) {
-    var url = apiUrl + '/schedule/' + encodeURIComponent(team) + '/' + encodeURIComponent(date);
+    var url = apiUrl + '/games?team=' + encodeURIComponent(team) + '&date=' + encodeURIComponent(date);
     $.getJSON(url, function(json) {
 
       var dateObj = new Date(Date.parse(date));
