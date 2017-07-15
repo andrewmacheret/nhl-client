@@ -40,13 +40,13 @@ $(function() {
 
       var html = '<div class="date-section">' + backLink + dateHtml + nextLink + '</div>';
 
-      var schedule = json.schedule;
-      if (schedule.length == 0) {
+      var games = json.games;
+      if (games.length == 0) {
         html += '<div class="no-games">(no games)</div>'
       } else {
         html += '<div class="schedule">';
-        for (var i=0; i<schedule.length; i++) {
-          var item = schedule[i];
+        for (var i=0; i<games.length; i++) {
+          var item = games[i];
 
           var team1 = (item.isHome ? item.home : item.away);
           var team2 = (item.isHome ? item.away : item.home);
@@ -86,7 +86,7 @@ $(function() {
       var link = document.createElement('link')
       link.setAttribute('rel', 'stylesheet')
       link.setAttribute('type', 'text/css')
-      link.setAttribute('href', json.logosUrl)
+      link.setAttribute('href', json.cssUrl)
       document.getElementsByTagName('head')[0].appendChild(link)
     });
   };
