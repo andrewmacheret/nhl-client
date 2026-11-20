@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="light dark">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 
 <!-- open graph -->
 <meta property="og:url" content="https://andrewmacheret.com/projects/nhl" />
@@ -22,12 +24,28 @@
 <script src="index.js" defer></script>
 
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="index.css"> 
+<link rel="stylesheet" type="text/css" href="index.css">
+</head>
 
 <body>
-<div id="body-wrapper">
-  
+<main class="app">
+  <header class="header">
+    <div>
+      <h1>NHL Today</h1>
+      <p>When your team plays, where to watch, and how it went.</p>
+    </div>
+    <div id="team-slot"></div>
+  </header>
 
-</div>
+  <div id="body-wrapper">
+    <section class="stage stage-loading"><p>Loading&hellip;</p></section>
+  </div>
+
+  <footer class="footer">
+    <a href="https://andrewmacheret.com/">More projects</a>
+    <span aria-hidden="true">&middot;</span>
+    <a href="https://github.com/andrewmacheret/nhl-client">Source</a>
+  </footer>
+</main>
 </body>
 </html>
