@@ -41,7 +41,9 @@ $(function() {
       var html = '<div class="date-section">' + backLink + dateHtml + nextLink + '</div>';
 
       var games = json.games;
-      if (games.length == 0) {
+      if (!games) {
+        html += '<div class="no-games">' + escapeHtml(json.errorMessage || 'Something went wrong') + '</div>';
+      } else if (games.length == 0) {
         html += '<div class="no-games">(no games)</div>'
       } else {
         html += '<div class="schedule">';
@@ -51,9 +53,9 @@ $(function() {
           var team1 = (item.isHome ? item.home : item.away);
           var team2 = (item.isHome ? item.away : item.home);
           
-          var logo1 = '<div class="logo logo-bg-dark--team-' + escapeHtml(team1.id) + '" title="' + escapeHtml(team1.name) + '"></div>';
+          var logo1 = '<img class="logo" src="' + escapeHtml(team1.logo) + '" alt="' + escapeHtml(team1.name) + '" title="' + escapeHtml(team1.name) + '">';
           var vsOrAt = '<div class="vs-or-at">' + (item.isHome ? 'vs' : 'at') + '</div>';
-          var logo2 = '<div class="logo logo-bg-dark--team-' + escapeHtml(team2.id) + '" title="' + escapeHtml(team2.name) + '"></div>';
+          var logo2 = '<img class="logo" src="' + escapeHtml(team2.logo) + '" alt="' + escapeHtml(team2.name) + '" title="' + escapeHtml(team2.name) + '">';
 
 
           var time = '<div class="time">' + new Date(Date.parse(item.gameDate)).toLocaleTimeString() + '</div>';
@@ -80,17 +82,6 @@ $(function() {
          .replace(/'/g, "&#039;");
  }
   
-  var loadCss = function() {
-    var url = apiUrl + '/css';
-    $.getJSON(url, function(json) {
-      var link = document.createElement('link')
-      link.setAttribute('rel', 'stylesheet')
-      link.setAttribute('type', 'text/css')
-      link.setAttribute('href', json.cssUrl)
-      document.getElementsByTagName('head')[0].appendChild(link)
-    });
-  };
-
   var query = getQueryObject();
 
   if (!query.team) {
@@ -102,6 +93,4 @@ $(function() {
   window.history.replaceState({}, null, '?team=' + encodeURIComponent(query.team) + '&date=' + encodeURIComponent(query.date));
 
   loadSchedule(query.team, query.date);
-
-  loadCss();
 });
