@@ -18,7 +18,6 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
-      # No --delete because screenshot.png only lives in the bucket
       - run: aws s3 sync www s3://andrewmacheret.com/projects/nhl
       - name: Invalidate CloudFront cache
         if: vars.CLOUDFRONT_DISTRIBUTION_ID != ''
