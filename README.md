@@ -2,11 +2,14 @@
 
 [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
 
-Shows what NHL games are on today for your favorite team, with the TV channels they're on.
+Shows what NHL games are on today for your favorite team, with the TV channels they're on. Follows the system's light or dark mode.
 
 Live at [andrewmacheret.com/projects/nhl](https://andrewmacheret.com/projects/nhl/).
 
-![Screenshot](www/screenshot.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="www/screenshot-dark.png">
+  <img alt="Screenshot of NHL Today showing a Sharks vs Kraken game" src="www/screenshot.png">
+</picture>
 
 ## Usage
 
@@ -27,4 +30,4 @@ That API only allows requests from `https://andrewmacheret.com` (CORS), so openi
 
 Pushes to `master` copy `www/` to `s3://andrewmacheret.com/projects/nhl` and clear the CloudFront cache through GitHub Actions (see `.github/workflows/deploy.yml`). The workflow signs in to AWS with GitHub OIDC using the IAM role in the `AWS_ROLE_ARN` repo variable.
 
-`www/screenshot.png` is used for this README and for link previews (`og:image`).
+`www/screenshot.png` is used for this README and for link previews (`og:image`). `www/screenshot-dark.png` is the README screenshot for GitHub's dark theme.

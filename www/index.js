@@ -53,9 +53,9 @@ $(function() {
           var team1 = (item.isHome ? item.home : item.away);
           var team2 = (item.isHome ? item.away : item.home);
           
-          var logo1 = '<img class="logo" src="' + escapeHtml(team1.logo) + '" alt="' + escapeHtml(team1.name) + '" title="' + escapeHtml(team1.name) + '">';
+          var logo1 = logoHtml(team1);
           var vsOrAt = '<div class="vs-or-at">' + (item.isHome ? 'vs' : 'at') + '</div>';
-          var logo2 = '<img class="logo" src="' + escapeHtml(team2.logo) + '" alt="' + escapeHtml(team2.name) + '" title="' + escapeHtml(team2.name) + '">';
+          var logo2 = logoHtml(team2);
 
 
           var time = '<div class="time">' + new Date(Date.parse(item.gameDate)).toLocaleTimeString() + '</div>';
@@ -73,6 +73,13 @@ $(function() {
     });
   };
   
+  function logoHtml(team) {
+    var darkSource = team.darkLogo ? '<source srcset="' + escapeHtml(team.darkLogo) + '" media="(prefers-color-scheme: dark)">' : '';
+    return '<picture class="logo">' + darkSource +
+      '<img src="' + escapeHtml(team.logo) + '" alt="' + escapeHtml(team.name) + '" title="' + escapeHtml(team.name) + '">' +
+      '</picture>';
+  }
+
   function escapeHtml(unsafe) {
     return (unsafe + '')
          .replace(/&/g, "&amp;")
