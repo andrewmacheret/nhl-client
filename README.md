@@ -22,7 +22,7 @@ For example, [`?team=maple%20leafs&date=2026-11-21`](https://andrewmacheret.com/
 
 ## How it works
 
-It's a static page in `www/` that uses jQuery. Game data and logo URLs come from [andrewmacheret/nhl-server-lambda](https://github.com/andrewmacheret/nhl-server-lambda) at `https://nhl.andrewmacheret.com`.
+It's a static page in `www/` with no libraries. Game data and logo URLs come from [andrewmacheret/nhl-server-lambda](https://github.com/andrewmacheret/nhl-server-lambda) at `https://nhl.andrewmacheret.com`.
 
 That API only allows requests from `https://andrewmacheret.com` (CORS), so opening `www/index.html` locally shows a blank page. To try changes locally, point `apiUrl` in `www/index.js` at a local copy of the server, or proxy the API.
 
