@@ -247,8 +247,7 @@ html {
   padding: 0;
   margin: 0;
   vertical-align: middle;
-  background-repeat: no-repeat;
-  background-position: left;
+  object-fit: contain;
 }
 
 .vs-or-at {
