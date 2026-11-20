@@ -5,6 +5,8 @@
   --muted: #555;
   --link: #213483;
   --link-hover: #4763d1;
+  --live: #c62828;
+  --win: #2e7d32;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +16,8 @@
     --muted: #a8adb5;
     --link: #8ea6ff;
     --link-hover: #c0ceff;
+    --live: #ff6b6b;
+    --win: #6fcf73;
   }
 }
 
@@ -28,7 +32,16 @@ html {
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+}
+
+/* Rows are sized in vw, so a scrollbar would push them onto two lines */
+html {
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 a:link, a:visited {
@@ -59,11 +72,59 @@ a:hover {
   text-align: center;
 }
 
+.time.live {
+  color: var(--live);
+  font-weight: bold;
+}
+
+.time.final {
+  color: var(--muted);
+}
+
+.score {
+  display: block;
+  width: 100vw;
+  text-align: center;
+  font-size: 8vw;
+  font-weight: bold;
+}
+
+.score.win {
+  color: var(--win);
+}
+
 .channels {
   display: block;
   width: 100vw;
   text-align: center;
   color: var(--muted);
+}
+
+.next-game {
+  display: block;
+  width: 100vw;
+  margin-top: 6vw;
+  text-align: center;
+}
+
+.footer {
+  margin: 8vw 0 4vw;
+  text-align: center;
+  font-size: 3.5vw;
+  color: var(--muted);
+}
+
+.footer select {
+  font: inherit;
+  color: var(--text);
+  background-color: var(--background);
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  padding: 0.5vw 1vw;
+}
+
+.calendar {
+  margin-top: 2vw;
 }
 
 .no-games {
