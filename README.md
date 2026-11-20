@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
 
-Shows what NHL games are on today for your favorite team, with the TV channels they're on, the score once the game starts, the team's record, and the next game. Live scores refresh every minute. Follows the system's light or dark mode.
+Shows what NHL games are on today for your favorite team, with the TV channels they're on, the score once the game starts, the team's record, and the next game. Live scores refresh every minute. It uses the same glassy look as the [cube](https://andrewmacheret.com/projects/cube/) and [Monty Hall](https://andrewmacheret.com/projects/montyhall/) pages, follows the system's light or dark mode, and works on phones and desktops.
 
 The footer has a team picker and links to subscribe to the team's schedule in Apple Calendar or Google Calendar.
 
@@ -20,7 +20,7 @@ Pick a team and date with query parameters:
 - `team`: the team's name, city or abbreviation, like `sharks`, `maple leafs`, `toronto` or `tor`. Defaults to `sharks`.
 - `date`: `YYYY-MM-DD`. Defaults to today.
 
-For example, [`?team=maple%20leafs&date=2026-11-21`](https://andrewmacheret.com/projects/nhl/?team=maple%20leafs&date=2026-11-21). The `<` and `>` links move a day back or forward.
+For example, [`?team=maple%20leafs&date=2026-11-21`](https://andrewmacheret.com/projects/nhl/?team=maple%20leafs&date=2026-11-21). The arrow buttons, or the left and right arrow keys, move a day back or forward.
 
 ## How it works
 
