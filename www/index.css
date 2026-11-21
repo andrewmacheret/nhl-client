@@ -1,11 +1,5 @@
 /* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
-:root {
-  --glass-hover: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
-  --logo-shadow: drop-shadow(0 10px 20px light-dark(rgb(15 23 42 / 0.15), rgb(0 0 0 / 0.35)));
-  --live-dot: light-dark(#dc2626, #f87171);
-}
-
 .app {
   max-width: 720px;
 }
@@ -108,7 +102,7 @@ a.control.round {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--live-dot);
+  background: var(--bad);
   animation: pulse 1.6s ease-in-out infinite;
 }
 
@@ -137,7 +131,7 @@ a.control.round {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: var(--logo-shadow);
+  filter: drop-shadow(var(--media-shadow));
 }
 
 .team-name {
@@ -258,7 +252,7 @@ a.next-card {
 }
 
 a.next-card:hover {
-  background: var(--glass-hover);
+  background: var(--control-hover);
   color: var(--text);
   text-decoration: none;
   transform: translateY(-1px);
