@@ -1,161 +1,13 @@
-/* Same look as the cube and Monty Hall pages, with a light version for light mode */
+/* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
 :root {
-  color-scheme: light dark;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --bg: #0b1120;
-  --bg-gradient: radial-gradient(120% 70% at 50% 0%, #3b4a66 0%, #1e293b 45%, #0b1120 100%);
-  --text: #e2e8f0;
-  --bright: #f1f5f9;
-  --muted: #94a3b8;
-  --glass: rgb(255 255 255 / 0.05);
-  --glass-border: rgb(255 255 255 / 0.1);
-  --glass-hover: rgb(255 255 255 / 0.08);
-  --control: rgb(255 255 255 / 0.08);
-  --control-border: rgb(255 255 255 / 0.14);
-  --control-hover: rgb(255 255 255 / 0.15);
-  --shadow: 0 20px 50px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
-  --control-shadow: 0 8px 24px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
-  --logo-shadow: drop-shadow(0 10px 20px rgb(0 0 0 / 0.35));
-  --link: #c4b5fd;
-  --link-hover: #ddd6fe;
-  --focus: #a5b4fc;
-  --win: #86efac;
-  --win-bg: rgb(74 222 128 / 0.18);
-  --win-border: rgb(74 222 128 / 0.45);
-  --lose: #fcd34d;
-  --lose-bg: rgb(251 191 36 / 0.15);
-  --lose-border: rgb(251 191 36 / 0.4);
-  --live: #fca5a5;
-  --live-dot: #f87171;
-  --live-bg: rgb(248 113 113 / 0.15);
-  --live-border: rgb(248 113 113 / 0.45);
-  color: var(--text);
-  background: var(--bg);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #e2e8f0;
-    --bg-gradient: radial-gradient(120% 70% at 50% 0%, #ffffff 0%, #eef2f7 45%, #dbe3ee 100%);
-    --text: #334155;
-    --bright: #0f172a;
-    --muted: #64748b;
-    --glass: rgb(255 255 255 / 0.65);
-    --glass-border: rgb(15 23 42 / 0.08);
-    --glass-hover: rgb(255 255 255 / 0.9);
-    --control: rgb(255 255 255 / 0.8);
-    --control-border: rgb(15 23 42 / 0.12);
-    --control-hover: #fff;
-    --shadow: 0 20px 50px rgb(15 23 42 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.8);
-    --control-shadow: 0 6px 18px rgb(15 23 42 / 0.08);
-    --logo-shadow: drop-shadow(0 8px 14px rgb(15 23 42 / 0.15));
-    --link: #6d28d9;
-    --link-hover: #7c3aed;
-    --focus: #6366f1;
-    --win: #15803d;
-    --win-bg: rgb(22 163 74 / 0.12);
-    --win-border: rgb(22 163 74 / 0.4);
-    --lose: #b45309;
-    --lose-bg: rgb(217 119 6 / 0.12);
-    --lose-border: rgb(217 119 6 / 0.4);
-    --live: #b91c1c;
-    --live-dot: #dc2626;
-    --live-bg: rgb(220 38 38 / 0.1);
-    --live-border: rgb(220 38 38 / 0.35);
-  }
-}
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-}
-
-body {
-  min-height: 100dvh;
-  background: var(--bg-gradient) no-repeat;
-  background-color: var(--bg);
-}
-
-h1,
-h2,
-h3,
-p {
-  margin: 0;
-}
-
-a:link,
-a:visited {
-  color: var(--link);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-a:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+  --glass-hover: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
+  --logo-shadow: drop-shadow(0 10px 20px light-dark(rgb(15 23 42 / 0.15), rgb(0 0 0 / 0.35)));
+  --live-dot: light-dark(#dc2626, #f87171);
 }
 
 .app {
-  box-sizing: border-box;
   max-width: 720px;
-  margin: 0 auto;
-  padding: max(1.5rem, env(safe-area-inset-top)) 1rem max(1.5rem, env(safe-area-inset-bottom));
-}
-
-/* header with the team picker */
-
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.header h1 {
-  color: var(--bright);
-  font-size: 1.25rem;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-.header p {
-  margin-top: 0.25rem;
-  color: var(--muted);
-  font-size: 0.875rem;
-}
-
-.team-picker select {
-  appearance: none;
-  -webkit-appearance: none;
-  max-width: 100%;
-  padding: 0.6rem 2.5rem 0.6rem 1.1rem;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  /* a small down arrow, since appearance: none hides the browser's */
-  background: var(--control) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
-  box-shadow: var(--control-shadow);
-  color: var(--bright);
-  font: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.team-picker select:hover {
-  background-color: var(--control-hover);
-}
-
-.team-picker option {
-  background: var(--bg);
-  color: var(--text);
 }
 
 /* date bar */
@@ -186,89 +38,32 @@ select:focus-visible {
   font-size: 0.85rem;
 }
 
-/* round and pill buttons, same as the cube and Monty Hall pages */
-
-.control,
 a.control {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  background: var(--control);
-  box-shadow: var(--control-shadow);
-  color: var(--bright);
   font-size: 0.95rem;
-  font-weight: 600;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: background-color 0.15s, transform 0.15s;
-}
-
-.control:hover {
-  background: var(--control-hover);
-  color: var(--bright);
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.control:active {
-  transform: translateY(0) scale(0.97);
-}
-
-.control:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
 }
 
 a.control.round {
   width: 2.75rem;
   height: 2.75rem;
-  padding: 0;
-}
-
-a.control.primary {
-  border-color: transparent;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  box-shadow: 0 8px 24px rgb(99 102 241 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.25);
-  color: #fff;
-}
-
-a.control.primary:hover {
-  background: linear-gradient(135deg, #7376f4, #b46af8);
-  color: #fff;
-}
-
-.control svg {
-  flex-shrink: 0;
 }
 
 /* the game card */
 
 .stage {
-  margin-top: 1.25rem;
   padding: 1.75rem 1.5rem 1.5rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
   text-align: center;
 }
 
 .stage-win {
-  border-color: var(--win-border);
+  border-color: var(--good-border);
 }
 
 .stage-lose {
-  border-color: var(--lose-border);
+  border-color: var(--warn-border);
 }
 
 .stage-live {
-  border-color: var(--live-border);
+  border-color: var(--bad-border);
 }
 
 .stage-loading,
@@ -304,25 +99,7 @@ a.control.primary:hover {
   min-height: 1.75rem;
 }
 
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  background: var(--control);
-  color: var(--muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.chip-live {
-  border-color: var(--live-border);
-  background: var(--live-bg);
-  color: var(--live);
+.chip.live {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -333,24 +110,6 @@ a.control.primary:hover {
   border-radius: 50%;
   background: var(--live-dot);
   animation: pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  50% {
-    opacity: 0.35;
-  }
-}
-
-.chip-win {
-  border-color: var(--win-border);
-  background: var(--win-bg);
-  color: var(--win);
-}
-
-.chip-lose {
-  border-color: var(--lose-border);
-  background: var(--lose-bg);
-  color: var(--lose);
 }
 
 .matchup {
@@ -486,19 +245,6 @@ a.control.primary:hover {
 
 .section-head {
   margin: 2rem 0 0.75rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.card {
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 a.next-card {
@@ -543,12 +289,6 @@ a.next-card:hover {
   color: var(--muted);
 }
 
-.stat-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
 .stat-card {
   padding: 1rem 1.25rem 1.1rem;
 }
@@ -587,22 +327,13 @@ a.next-card:hover {
   margin-top: 0.9rem;
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-top: 2.5rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
 @media (max-width: 640px) {
   .header {
     gap: 0.9rem;
   }
 
   #team-slot,
-  .team-picker select {
+  .select {
     width: 100%;
   }
 
@@ -612,7 +343,6 @@ a.next-card:hover {
 
   .stage {
     padding: 1.25rem 0.75rem;
-    border-radius: 20px;
   }
 
   .team-name {
@@ -646,7 +376,6 @@ a.next-card:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .control,
   a.next-card {
     transition: none;
   }
