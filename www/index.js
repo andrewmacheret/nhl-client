@@ -157,7 +157,7 @@
     var middle;
 
     if (item.state === 'postponed' || item.state === 'cancelled') {
-      chip = '<span class="chip chip-lose">' + (item.state === 'postponed' ? 'Postponed' : 'Cancelled') + '</span>';
+      chip = '<span class="chip warn">' + (item.state === 'postponed' ? 'Postponed' : 'Cancelled') + '</span>';
       middle = '<div class="vs">' + vsOrAt + '</div>';
     } else if (!item.score) {
       var start = formatTime(item.gameDate);
@@ -179,11 +179,11 @@
 
       if (item.state === 'live') {
         tone = 'stage-live';
-        chip = '<span class="chip chip-live"><span class="live-dot"></span>Live &middot; ' + escapeHtml(item.period || '') + '</span>';
+        chip = '<span class="chip bad live"><span class="live-dot"></span>Live &middot; ' + escapeHtml(item.period || '') + '</span>';
       } else {
         var overtime = item.endedIn && item.endedIn !== 'REG' ? ' &middot; ' + escapeHtml(item.endedIn) : '';
         tone = ahead ? 'stage-win' : 'stage-lose';
-        chip = '<span class="chip ' + (ahead ? 'chip-win' : 'chip-lose') + '">' + (ahead ? 'Win' : 'Loss') + overtime + '</span>';
+        chip = '<span class="chip ' + (ahead ? 'good' : 'warn') + '">' + (ahead ? 'Win' : 'Loss') + overtime + '</span>';
       }
     }
 
@@ -292,7 +292,7 @@
     var options = teams.map(function(t) {
       return '<option value="' + escapeHtml(t.id) + '"' + (t.id === team.id ? ' selected' : '') + '>' + escapeHtml(t.name) + '</option>';
     }).join('');
-    return '<div class="team-picker"><select id="team-picker" aria-label="Team">' + options + '</select></div>';
+    return '<div class="team-picker"><select id="team-picker" class="select" aria-label="Team">' + options + '</select></div>';
   }
 
   function logoHtml(team) {
