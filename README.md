@@ -1,6 +1,6 @@
 # NHL Today
 
-[![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
+[![Deploy to S3](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
 
 Shows what NHL games are on today for your favorite team, with the TV channels they're on, the score once the game starts, the team's record, and the next game. Live scores refresh every minute. It uses the same glassy look as the [cube](https://andrewmacheret.com/projects/cube/) and [Monty Hall](https://andrewmacheret.com/projects/montyhall/) pages, follows the system's light or dark mode, and works on phones and desktops.
 
