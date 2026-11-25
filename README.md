@@ -34,7 +34,7 @@ Pushes to `master` copy `www/` to `s3://andrewmacheret.com/projects/nhl` and cle
 
 ## Health check
 
-[`/projects/nhl/healthcheck/`](https://andrewmacheret.com/projects/nhl/healthcheck/) checks the page and its scripts and styles, the NHL API's own health check, and NHL's logo server. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles, the NHL API's own health check, and NHL's logo server. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Screenshots
 
