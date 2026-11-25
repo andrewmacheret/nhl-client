@@ -1,6 +1,6 @@
 # NHL Today
 
-[![Deploy to S3](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
+[![Deploy to S3](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/nhl-client/actions/workflows/deploy.yml) [![Canary](https://github.com/andrewmacheret/nhl-client/actions/workflows/canary.yml/badge.svg)](https://github.com/andrewmacheret/nhl-client/actions/workflows/canary.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/nhl-client/blob/master/LICENSE.md)
 
 Shows what NHL games are on today for your favorite team, with the TV channels they're on, the score once the game starts, the team's record, and the next game. Live scores refresh every minute. It uses the same glassy look as the [cube](https://andrewmacheret.com/projects/cube/) and [Monty Hall](https://andrewmacheret.com/projects/montyhall/) pages, follows the system's light or dark mode, and works on phones and desktops.
 
@@ -31,5 +31,11 @@ That API only allows requests from `https://andrewmacheret.com` (CORS), so openi
 ## Deploy
 
 Pushes to `master` copy `www/` to `s3://andrewmacheret.com/projects/nhl` and clear the CloudFront cache through GitHub Actions (see `.github/workflows/deploy.yml`). The workflow signs in to AWS with GitHub OIDC using the IAM role in the `AWS_ROLE_ARN` repo variable.
+
+## Health check
+
+[`/projects/nhl/healthcheck/`](https://andrewmacheret.com/projects/nhl/healthcheck/) checks the page and its scripts and styles, the NHL API's own health check, and NHL's logo server. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+
+## Screenshots
 
 `www/screenshot.png` is used for this README and for link previews (`og:image`). `www/screenshot-dark.png` is the README screenshot for GitHub's dark theme.
