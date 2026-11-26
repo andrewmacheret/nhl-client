@@ -60,6 +60,12 @@ a.control.round {
   border-color: var(--bad-border);
 }
 
+/* the old day while the next one loads */
+#body-wrapper.is-loading {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
 .stage-loading,
 .stage-empty {
   padding: 3rem 1.5rem;

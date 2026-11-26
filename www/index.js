@@ -74,9 +74,18 @@
     return '?team=' + encodeURIComponent(team) + '&date=' + encodeURIComponent(date);
   };
 
-  var loadSchedule = function(team, date) {
-    var url = apiUrl + '/games' + pageUrl(team, date);
-    fetch(url)
+  // Responses by page URL, so days you've seen or that were fetched ahead show up right away
+  var responses = {};
+
+  var isLive = function(game) { return game.state === 'live'; };
+
+  var fetchSchedule = function(team, date, fresh) {
+    var key = pageUrl(team, date);
+    var saved = responses[key];
+    if (saved && !fresh && Date.now() - saved.time < saved.maxAgeMs) {
+      return saved.json;
+    }
+    var json = fetch(apiUrl + '/games' + key)
       .then(function(response) {
         // Errors come back as JSON too, like {"errorMessage": "team not found: 'nope'"}
         return response.json().catch(function() {
@@ -86,14 +95,66 @@
       .catch(function() {
         return { errorMessage: 'Could not reach the NHL schedule. Try again in a minute.' };
       })
-      .then(function(json) {
-        render(team, date, json);
-        // Keep live scores fresh
-        var live = (json.games || []).some(function(game) { return game.state === 'live'; });
-        if (live) {
-          setTimeout(function() { loadSchedule(team, date); }, 60 * 1000);
+      .then(function(result) {
+        var entry = responses[key];
+        if (entry && entry.json === json) {
+          // Don't keep errors, so the next try asks again
+          if (!result.games) delete responses[key];
+          // Live scores go stale fast
+          else if (result.games.some(isLive)) entry.maxAgeMs = 60 * 1000;
         }
+        return result;
       });
+    responses[key] = { time: Date.now(), json: json, maxAgeMs: 5 * 60 * 1000 };
+    return json;
+  };
+
+  // The days next to this one, one at a time so a cold API only starts one copy of itself
+  var fetchAhead = function(team, date, json) {
+    var dates = [addDays(date, 1), addDays(date, -1)];
+    if (json.next) dates.push(json.next.date);
+    dates.reduce(function(previous, day) {
+      return previous.then(function() { return fetchSchedule(team, day); });
+    }, Promise.resolve());
+  };
+
+  var liveTimer = null;
+  var shown = null;
+
+  var loadSchedule = function(team, date, fresh) {
+    var key = pageUrl(team, date);
+    shown = key;
+    clearTimeout(liveTimer);
+    var wrapper = document.getElementById('body-wrapper');
+    var json = fetchSchedule(team, date, fresh);
+    // Fade the old day only if the new one takes a moment, so quick loads don't flicker
+    var fadeTimer = setTimeout(function() { wrapper.classList.add('is-loading'); }, 150);
+    json.then(function(json) {
+      // A newer click won the race
+      if (shown !== key) return;
+      clearTimeout(fadeTimer);
+      wrapper.classList.remove('is-loading');
+      render(team, date, json);
+      if (!json.games) return;
+      // Keep live scores fresh
+      if (json.games.some(isLive)) {
+        liveTimer = setTimeout(function() { loadSchedule(team, date, true); }, 60 * 1000);
+      }
+      fetchAhead(team, date, json);
+    });
+  };
+
+  // Moves to another team or day without reloading the page
+  var go = function(team, date) {
+    query.team = team;
+    query.date = date;
+    window.history.pushState({}, '', pageUrl(team, date));
+    // Links like "Up next" sit below the fold, so bring the date back into view
+    var wrapper = document.getElementById('body-wrapper');
+    if (wrapper.getBoundingClientRect().top < 0) {
+      wrapper.scrollIntoView();
+    }
+    loadSchedule(team, date);
   };
 
   var render = function(team, date, json) {
@@ -126,7 +187,7 @@
     document.getElementById('body-wrapper').innerHTML = html;
     document.getElementById('team-slot').innerHTML = teamPickerHtml(json.team, json.teams);
     document.getElementById('team-picker').addEventListener('change', function(event) {
-      document.location.search = pageUrl(event.target.value, date);
+      go(event.target.value, date);
     });
     document.title = json.team.name + ' · NHL Today';
   };
@@ -311,23 +372,43 @@
          .replace(/'/g, "&#039;");
  }
 
-  var query = getQueryObject();
+  var readQuery = function() {
+    var query = getQueryObject();
+    if (!query.team) {
+      query.team = 'sharks'; // go sharks!
+    }
+    if (!query.date) {
+      query.date = newLocalDate();
+    }
+    return query;
+  };
 
-  if (!query.team) {
-    query.team = 'sharks'; // go sharks!
-  }
-  if (!query.date) {
-    query.date = newLocalDate();
-  }
-  window.history.replaceState({}, null, pageUrl(query.team, query.date));
+  var query = readQuery();
+  window.history.replaceState({}, '', pageUrl(query.team, query.date));
 
   // Left and right arrow keys move a day back or forward
   document.addEventListener('keydown', function(event) {
     if (event.altKey || event.ctrlKey || event.metaKey || event.target.tagName === 'SELECT') return;
     var days = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
     if (days) {
-      document.location.search = pageUrl(query.team, addDays(query.date, days));
+      go(query.team, addDays(query.date, days));
     }
+  });
+
+  // Links to other days, like the arrows and "Jump to today", skip the page reload.
+  // Cmd-click and middle-click still open a new tab
+  document.addEventListener('click', function(event) {
+    var link = event.target.closest('a[href^="?"]');
+    if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var params = new URLSearchParams(link.getAttribute('href'));
+    event.preventDefault();
+    go(params.get('team'), params.get('date'));
+  });
+
+  // The back and forward buttons
+  window.addEventListener('popstate', function() {
+    query = readQuery();
+    loadSchedule(query.team, query.date);
   });
 
   loadSchedule(query.team, query.date);
