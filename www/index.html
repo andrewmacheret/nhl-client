@@ -44,10 +44,18 @@
       </div>
       <p>When your team plays, where to watch, and how it went.</p>
     </div>
-    <div id="team-slot"></div>
+    <!-- hidden stand-ins hold the team picker's and date bar's space, so nothing moves when the page fills in -->
+    <div id="team-slot">
+      <div class="team-picker placeholder"><select class="select" disabled><option></option></select></div>
+    </div>
   </header>
 
   <div id="body-wrapper">
+    <nav class="date-nav placeholder">
+      <a class="control round"></a>
+      <div class="date-label"><div class="date-main">&nbsp;</div><div class="date-sub"></div></div>
+      <a class="control round"></a>
+    </nav>
     <section class="stage stage-loading"><p>Loading&hellip;</p></section>
   </div>
 

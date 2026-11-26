@@ -7,6 +7,11 @@
   max-width: 720px;
 }
 
+/* stand-ins in index.html that only hold space until the schedule loads */
+.placeholder {
+  visibility: hidden;
+}
+
 /* date bar */
 
 .date-nav {

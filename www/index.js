@@ -385,6 +385,9 @@
 
   var query = readQuery();
   window.history.replaceState({}, '', pageUrl(query.team, query.date));
+  // The date is already known, so show it while the schedule loads
+  document.getElementById('body-wrapper').innerHTML = dateNavHtml(query.team, query.date) +
+    '<section class="stage stage-loading"><p>Loading&hellip;</p></section>';
 
   // Left and right arrow keys move a day back or forward
   document.addEventListener('keydown', function(event) {
