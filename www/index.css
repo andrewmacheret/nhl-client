@@ -1,6 +1,9 @@
 /* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
 .app {
+  --logo-size: clamp(84px, 24vw, 150px);
+  /* everything in a game card besides the logos, so other cards can be just as tall */
+  --game-card-extra: 13.4rem;
   max-width: 720px;
 }
 
@@ -43,7 +46,13 @@ a.control.round {
 
 /* the game card */
 
+/* every card is as tall as a game card, so the page doesn't jump between game days and off days */
 .stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: calc(var(--logo-size) + var(--game-card-extra));
   padding: 1.75rem 1.5rem 1.5rem;
   text-align: center;
 }
@@ -68,7 +77,7 @@ a.control.round {
 
 .stage-loading,
 .stage-empty {
-  padding: 3rem 1.5rem;
+  align-items: center;
 }
 
 .stage-loading p {
@@ -129,7 +138,7 @@ a.control.round {
 
 .logo {
   display: block;
-  width: clamp(84px, 24vw, 150px);
+  width: var(--logo-size);
   aspect-ratio: 1;
 }
 
@@ -328,6 +337,11 @@ a.next-card:hover {
 }
 
 @media (max-width: 640px) {
+  /* phones wrap the TV list and long team names onto two lines */
+  .app {
+    --game-card-extra: 15.25rem;
+  }
+
   .header {
     gap: 0.9rem;
   }
