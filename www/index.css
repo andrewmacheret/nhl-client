@@ -7,9 +7,42 @@
   max-width: 720px;
 }
 
-/* stand-ins in index.html that only hold space until the schedule loads */
-.placeholder {
-  visibility: hidden;
+/* the scrollbar showing up as the page grows would shift everything sideways */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* gray shapes in index.html until the schedule loads */
+.skeleton {
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.skeleton .bone {
+  border-radius: 6px;
+  background: var(--control);
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.skeleton .select,
+.skeleton .control {
+  border-color: transparent;
+  background: var(--control);
+  box-shadow: none;
+  color: transparent;
+}
+
+/* the buttons are already gray, so their text doesn't need its own shape */
+.skeleton .control .bone {
+  background: none;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
 }
 
 /* date bar */
@@ -399,7 +432,8 @@ a.next-card:hover {
     transition: none;
   }
 
-  .live-dot {
+  .live-dot,
+  .skeleton {
     animation: none;
   }
 }

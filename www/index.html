@@ -44,19 +44,34 @@
       </div>
       <p>When your team plays, where to watch, and how it went.</p>
     </div>
-    <!-- hidden stand-ins hold the team picker's and date bar's space, so nothing moves when the page fills in -->
+    <!-- Gray shapes until the schedule loads. They use the real markup and sample text, so nothing moves when the page fills in.
+         The picker holds the longest team name, since a select is as wide as its longest option -->
     <div id="team-slot">
-      <div class="team-picker placeholder"><select class="select" disabled><option></option></select></div>
+      <div class="team-picker skeleton" aria-hidden="true"><select class="select" disabled tabindex="-1"><option>Columbus Blue Jackets</option></select></div>
     </div>
   </header>
 
   <div id="body-wrapper">
-    <nav class="date-nav placeholder">
+    <nav class="date-nav skeleton" aria-hidden="true">
       <a class="control round"></a>
-      <div class="date-label"><div class="date-main">&nbsp;</div><div class="date-sub"></div></div>
+      <div class="date-label"><div class="date-main"><span class="bone">Thursday, Nov 26</span></div><div class="date-sub"><span class="bone">Today</span></div></div>
       <a class="control round"></a>
     </nav>
     <section class="stage stage-loading"><p>Loading&hellip;</p></section>
+    <div class="skeleton" aria-hidden="true">
+      <h2 class="section-head"><span class="bone">This season</span></h2>
+      <div class="stat-cards">
+        <div class="card stat-card"><h3><span class="bone">Record</span></h3><div class="stat-value"><span class="bone">11-14-2</span></div><div class="stat-note"><span class="bone">Wins, losses, OT</span></div></div>
+        <div class="card stat-card"><h3><span class="bone">Points</span></h3><div class="stat-value"><span class="bone">24</span></div><div class="stat-note"><span class="bone">2 per win, 1 per OT loss</span></div></div>
+        <div class="card stat-card"><h3><span class="bone">Streak</span></h3><div class="stat-value"><span class="bone">L2</span></div><div class="stat-note"><span class="bone">2 losses in a row</span></div></div>
+      </div>
+      <h2 class="section-head"><span class="bone">Never miss a game</span></h2>
+      <p class="calendar-text"><span class="bone">Add every San Jose Sharks game to your calendar. It updates on its own.</span></p>
+      <div class="dock">
+        <a class="control"><span class="bone">&#9632; Apple Calendar</span></a>
+        <a class="control"><span class="bone">&#9632; Google Calendar</span></a>
+      </div>
+    </div>
   </div>
 
   <footer class="footer">
